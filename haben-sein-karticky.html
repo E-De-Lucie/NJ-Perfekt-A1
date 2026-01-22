@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfektum Kartičky</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .counter {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .card-container {
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            width: 350px;
+            height: 250px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-front {
+            background: white;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transform: rotateY(180deg);
+            color: white;
+        }
+
+        .verb {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .partizip {
+            font-size: 1.3em;
+            color: #666;
+            font-style: italic;
+        }
+
+        .auxiliary {
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hint {
+            font-size: 0.9em;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-prev {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-shuffle {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .instruction {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 300px;
+                height: 220px;
+            }
+
+            .verb {
+                font-size: 2em;
+            }
+
+            .auxiliary {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🇩🇪 Perfektum Kartičky</h1>
+        <p>Klikni na kartičku pro otočení</p>
+    </div>
+
+    <div class="counter" id="counter">
+        Kartička 1 / 20
+    </div>
+
+    <div class="card-container">
+        <div class="card" id="card" onclick="flipCard()">
+            <div class="card-face card-front">
+                <div class="verb" id="verb">machen</div>
+                <div class="partizip" id="partizip">(gemacht)</div>
+            </div>
+            <div class="card-face card-back">
+                <div class="auxiliary" id="auxiliary">haben</div>
+                <div class="hint" id="hint">Ich habe gemacht</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="btn-prev" onclick="prevCard()">◀ Předchozí</button>
+        <button class="btn-shuffle" onclick="shuffleCards()">🔀 Zamíchat</button>
+        <button class="btn-next" onclick="nextCard()">Další ▶</button>
+    </div>
+
+    <div class="instruction">
+        💡 Tip: Zkus si nejdřív tipnout haben nebo sein, pak kartičku otoč!
+    </div>
+
+    <script>
+        const verbs = [
+            { verb: "machen", partizip: "gemacht", auxiliary: "haben", example: "Ich habe gemacht" },
+            { verb: "gehen", partizip: "gegangen", auxiliary: "sein", example: "Ich bin gegangen" },
+            { verb: "essen", partizip: "gegessen", auxiliary: "haben", example: "Ich habe gegessen" },
+            { verb: "trinken", partizip: "getrunken", auxiliary: "haben", example: "Ich habe getrunken" },
+            { verb: "schlafen", partizip: "geschlafen", auxiliary: "haben", example: "Ich habe geschlafen" },
+            { verb: "kommen", partizip: "gekommen", auxiliary: "sein", example: "Ich bin gekommen" },
+            { verb: "fahren", partizip: "gefahren", auxiliary: "sein", example: "Ich bin gefahren" },
+            { verb: "lernen", partizip: "gelernt", auxiliary: "haben", example: "Ich habe gelernt" },
+            { verb: "spielen", partizip: "gespielt", auxiliary: "haben", example: "Ich habe gespielt" },
+            { verb: "kaufen", partizip: "gekauft", auxiliary: "haben", example: "Ich habe gekauft" },
+            { verb: "sehen", partizip: "gesehen", auxiliary: "haben", example: "Ich habe gesehen" },
+            { verb: "lesen", partizip: "gelesen", auxiliary: "haben", example: "Ich habe gelesen" },
+            { verb: "schreiben", partizip: "geschrieben", auxiliary: "haben", example: "Ich habe geschrieben" },
+            { verb: "bleiben", partizip: "geblieben", auxiliary: "sein", example: "Ich bin geblieben" },
+            { verb: "finden", partizip: "gefunden", auxiliary: "haben", example: "Ich habe gefunden" },
+            { verb: "sagen", partizip: "gesagt", auxiliary: "haben", example: "Ich habe gesagt" },
+            { verb: "hören", partizip: "gehört", auxiliary: "haben", example: "Ich habe gehört" },
+            { verb: "arbeiten", partizip: "gearbeitet", auxiliary: "haben", example: "Ich habe gearbeitet" },
+            { verb: "laufen", partizip: "gelaufen", auxiliary: "sein", example: "Ich bin gelaufen" },
+            { verb: "schwimmen", partizip: "geschwommen", auxiliary: "sein", example: "Ich bin geschwommen" }
+        ];
+
+        let currentIndex = 0;
+        let cardFlipped = false;
+
+        function updateCard() {
+            const card = document.getElementById('card');
+            const verb = verbs[currentIndex];
+            
+            document.getElementById('verb').textContent = verb.verb;
+            document.getElementById('partizip').textContent = `(${verb.partizip})`;
+            document.getElementById('auxiliary').textContent = verb.auxiliary;
+            document.getElementById('hint').textContent = verb.example;
+            document.getElementById('counter').textContent = `Kartička ${currentIndex + 1} / ${verbs.length}`;
+            
+            if (cardFlipped) {
+                card.classList.remove('flipped');
+                cardFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            const card = document.getElementById('card');
+            card.classList.toggle('flipped');
+            cardFlipped = !cardFlipped;
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % verbs.length;
+            updateCard();
+        }
+
+        function prevCard() {
+            currentIndex = (currentIndex - 1 + verbs.length) % verbs.length;
+            updateCard();
+        }
+
+        function shuffleCards() {
+            for (let i = verbs.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [verbs[i], verbs[j]] = [verbs[j], verbs[i]];
+            }
+            currentIndex = 0;
+            updateCard();
+        }
+
+        // Klávesové zkratky
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextCard();
+            if (e.key === 'ArrowLeft') prevCard();
+            if (e.key === ' ') {
+                e.preventDefault();
+                flipCard();
+            }
+        });
+
+        updateCard();
+    </script>
+</body>
+</html>
