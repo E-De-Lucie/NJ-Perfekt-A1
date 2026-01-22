@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfektum - Handout</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #667eea;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #764ba2;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .box-pink {
+            background: #fff0f5;
+            border-left: 5px solid #f5576c;
+        }
+
+        .box-green {
+            background: #f0fff4;
+            border-left: 5px solid #48bb78;
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .table tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        .verb-type {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .regular {
+            background: #48bb78;
+            color: white;
+        }
+
+        .irregular {
+            background: #f5576c;
+            color: white;
+        }
+
+        .example {
+            background: #fff9e6;
+            border-left: 4px solid #ffa500;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+
+        .example strong {
+            color: #ff6b35;
+        }
+
+        .tip {
+            background: #e6f7ff;
+            border: 2px dashed #1890ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .tip::before {
+            content: "💡 TIP: ";
+            font-weight: bold;
+            color: #1890ff;
+        }
+
+        .haben-color {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .sein-color {
+            color: #f5576c;
+            font-weight: bold;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .haben-box {
+            background: linear-gradient(135deg, #667eea20 0%, #764ba240 100%);
+            border: 3px solid #667eea;
+        }
+
+        .sein-box {
+            background: linear-gradient(135deg, #f093fb20 0%, #f5576c40 100%);
+            border: 3px solid #f5576c;
+        }
+
+        .grid-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .highlight {
+            background: #fff59d;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .page {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>🇩🇪 PERFEKTUM</h1>
+            <div class="subtitle">Minulý čas v němčině (A1)</div>
+        </div>
+
+        <!-- Co je Perfektum -->
+        <div class="section">
+            <div class="section-title">📌 Co je Perfektum?</div>
+            <div class="box">
+                <p><strong>Perfektum</strong> = minulý čas, který používáme v běžné mluvené němčině</p>
+                <div class="example">
+                    <strong>Česky:</strong> Včera jsem jedl pizzu.<br>
+                    <strong>Německy:</strong> Gestern <span class="haben-color">habe</span> ich Pizza <span class="highlight">gegessen</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Jak se tvoří -->
+        <div class="section">
+            <div class="section-title">⚙️ Jak se tvoří Perfektum?</div>
+            
+            <div class="formula">
+                haben/sein + Partizip II
+            </div>
+
+            <div class="box box-pink">
+                <h3>Slovosled:</h3>
+                <p style="font-size: 1.2em; margin-top: 10px;">
+                    <strong>Ich</strong> <span class="haben-color">habe</span> Pizza <span class="highlight">gegessen</span>.<br>
+                    <span style="color: #999;">↑ pomocné sloveso na 2. místě</span> 
+                    <span style="color: #999; float: right;">↑ Partizip II na konci věty</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Tvorba Partizip II -->
+        <div class="section">
+            <div class="section-title">🔧 Tvorba Partizip II</div>
+            
+            <div class="box box-green">
+                <h3><span class="verb-type regular">PRAVIDELNÁ SLOVESA</span></h3>
+                <p style="font-size: 1.3em; margin: 15px 0;">
+                    <span class="highlight">ge-</span> + kmen slovesa + <span class="highlight">-t</span>
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>Infinitiv</th>
+                        <th>Kmen</th>
+                        <th>Partizip II</th>
+                        <th>Příklad</th>
+                    </tr>
+                    <tr>
+                        <td>machen</td>
+                        <td>mach</td>
+                        <td><strong>gemacht</strong></td>
+                        <td>Ich habe gemacht</td>
+                    </tr>
+                    <tr>
+                        <td>spielen</td>
+                        <td>spiel</td>
+                        <td><strong>gespielt</strong></td>
+                        <td>Ich habe gespielt</td>
+                    </tr>
+                    <tr>
+                        <td>kaufen</td>
+                        <td>kauf</td>
+                        <td><strong>gekauft</strong></td>
+                        <td>Ich habe gekauft</td>
+                    </tr>
+                    <tr>
+                        <td>lernen</td>
+                        <td>lern</td>
+                        <td><strong>gelernt</strong></td>
+                        <td>Ich habe gelernt</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="box box-pink">
+                <h3><span class="verb-type irregular">NEPRAVIDELNÁ SLOVESA</span></h3>
+                <p style="font-size: 1.3em; margin: 15px 0;">
+                    <span class="highlight">ge-</span> + změněný kmen + <span class="highlight">-en</span>
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>Infinitiv</th>
+                        <th>Partizip II</th>
+                        <th>Příklad</th>
+                    </tr>
+                    <tr>
+                        <td>essen</td>
+                        <td><strong>gegessen</strong></td>
+                        <td>Ich habe gegessen</td>
+                    </tr>
+                    <tr>
+                        <td>trinken</td>
+                        <td><strong>getrunken</strong></td>
+                        <td>Ich habe getrunken</td>
+                    </tr>
+                    <tr>
+                        <td>schlafen</td>
+                        <td><strong>geschlafen</strong></td>
+                        <td>Ich habe geschlafen</td>
+                    </tr>
+                    <tr>
+                        <td>schreiben</td>
+                        <td><strong>geschrieben</strong></td>
+                        <td>Ich habe geschrieben</td>
+                    </tr>
+                    <tr>
+                        <td>lesen</td>
+                        <td><strong>gelesen</strong></td>
+                        <td>Ich habe gelesen</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="tip">
+                Nepravidelná slovesa se musí naučit nazpaměť! Seznam najdeš v učebnici.
+            </div>
+        </div>
+
+        <!-- haben vs sein -->
+        <div class="section">
+            <div class="section-title">🔀 Kdy použít HABEN a kdy SEIN?</div>
+            
+            <div class="grid">
+                <div class="grid-item haben-box">
+                    <h3 class="haben-color">HABEN</h3>
+                    <p style="font-size: 1.1em; margin: 15px 0;"><strong>Většina sloves!</strong></p>
+                    <ul style="text-align: left;">
+                        <li>essen (jíst)</li>
+                        <li>trinken (pít)</li>
+                        <li>machen (dělat)</li>
+                        <li>lernen (učit se)</li>
+                        <li>spielen (hrát)</li>
+                        <li>kaufen (koupit)</li>
+                        <li>schlafen (spát)</li>
+                        <li>arbeiten (pracovat)</li>
+                    </ul>
+                </div>
+
+                <div class="grid-item sein-box">
+                    <h3 class="sein-color">SEIN</h3>
+                    <p style="font-size: 1.1em; margin: 15px 0;"><strong>Pohyb + změna stavu</strong></p>
+                    <ul style="text-align: left;">
+                        <li>gehen (jít) → <strong>pohyb</strong></li>
+                        <li>fahren (jet) → <strong>pohyb</strong></li>
+                        <li>kommen (přijít) → <strong>pohyb</strong></li>
+                        <li>laufen (běžet) → <strong>pohyb</strong></li>
+                        <li>fliegen (letět) → <strong>pohyb</strong></li>
+                        <li>bleiben (zůstat)</li>
+                        <li>sein (být)</li>
+                        <li>werden (stát se)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tip">
+                POZOR: "fahren" = jet autem/vlakem → SEIN, ale "Auto fahren" = řídit → HABEN
+            </div>
+        </div>
+
+        <!-- Příklady -->
+        <div class="section">
+            <div class="section-title">✏️ Příklady vět</div>
+            
+            <div class="example">
+                Ich <span class="haben-color">habe</span> Pizza <strong>gegessen</strong>. <span style="float: right;">🍕 (Jedl jsem pizzu.)</span>
+            </div>
+
+            <div class="example">
+                Ich <span class="sein-color">bin</span> nach Hause <strong>gegangen</strong>. <span style="float: right;">🏠 (Šel jsem domů.)</span>
+            </div>
+
+            <div class="example">
+                Sie <span class="haben-color">hat</span> Deutsch <strong>gelernt</strong>. <span style="float: right;">📚 (Ona se učila němčinu.)</span>
+            </div>
+
+            <div class="example">
+                Wir <span class="sein-color">sind</span> nach Berlin <strong>gefahren</strong>. <span style="float: right;">🚗 (Jeli jsme do Berlína.)</span>
+            </div>
+
+            <div class="example">
+                Er <span class="haben-color">hat</span> Fußball <strong>gespielt</strong>. <span style="float: right;">⚽ (On hrál fotbal.)</span>
+            </div>
+        </div>
+
+        <!-- Časté chyby -->
+        <div class="section">
+            <div class="section-title">⚠️ Časté chyby</div>
+            <div class="box box-pink">
+                <p style="font-size: 1.1em;">
+                    ❌ Ich <strong>habe gegangen</strong>. (ŠPATNĚ!)<br>
+                    ✅ Ich <strong>bin gegangen</strong>. (SPRÁVNĚ!)<br><br>
+                    
+                    ❌ Ich habe <strong>machen</strong>. (ŠPATNĚ!)<br>
+                    ✅ Ich habe <strong>gemacht</strong>. (SPRÁVNĚ!)<br><br>
+                    
+                    ❌ Ich <strong>gemacht habe</strong>. (ŠPATNĚ!)<br>
+                    ✅ Ich <strong>habe gemacht</strong>. (SPRÁVNĚ!)
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
