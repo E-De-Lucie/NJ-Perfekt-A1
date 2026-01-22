@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfektum - Výukové materiály</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.3em;
+            margin-bottom: 50px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .card-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇩🇪 Perfektum</h1>
+        <p class="subtitle">Výukové materiály pro úroveň A1</p>
+
+        <div class="cards">
+            <a href="karticky.html" class="card">
+                <div class="card-icon">🃏</div>
+                <div class="card-title">Interaktivní kartičky</div>
+                <div class="card-desc">Procvič si haben vs. sein</div>
+            </a>
+
+            <a href="handout.html" class="card">
+                <div class="card-icon">📄</div>
+                <div class="card-title">Handout</div>
+                <div class="card-desc">Gramatické pravidla</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+```
+
+4. Klikněte na **"Commit changes"**
+
+### Krok 3: Přejmenování souboru s kartičkami
+1. V repozitáři najděte původní soubor s kartičkami (pokud se jmenuje `index.html`, potřebujeme ho přejmenovat)
+2. Klikněte na soubor → tři tečky (...) → **"Rename"**
+3. Přejmenujte na: `karticky.html`
+4. Klikněte na **"Commit changes"**
+
+---
+
+## Výsledná struktura repozitáře:
+```
+perfektum-karticky/
+├── index.html       (hlavní stránka s menu)
+├── karticky.html    (interaktivní kartičky)
+└── handout.html     (gramatický handout)
